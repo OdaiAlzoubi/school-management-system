@@ -3,47 +3,28 @@
 namespace App\Http\Controllers\Api\School;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\School\TeacherService;
+use App\Http\Requests\Teacher\TeacherStoreRequest;
+use Soft\ApiResponse\Factories\ApiResponseFactory;
+use App\Http\Requests\Teacher\TeacherUpdateRequest;
 
 class TeacherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(protected TeacherService $teacherService) {}
+
+    public function create(TeacherStoreRequest $request)
     {
-        //
+        return $this->handleApi(function () use ($request) {
+            $teacher = $this->teacherService->create($request->validated());
+            return ApiResponseFactory::success()->data($teacher)->code(201)->toJson();
+        });
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(TeacherUpdateRequest $request, int $id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $this->handleApi(function () use ($request, $id) {
+            $teacher = $this->teacherService->update($request->validated(), $id);
+            return ApiResponseFactory::success()->data($teacher)->code(200)->toJson();
+        });
     }
 }
