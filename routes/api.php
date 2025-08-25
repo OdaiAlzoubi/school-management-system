@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\School\StudentController;
+use App\Http\Controllers\Api\School\GuardianController;
 
 
 Route::post('/register', [RegisterController::class, 'register']);
@@ -17,4 +18,8 @@ Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::AD
     Route::put('/update/{id}', [StudentController::class, 'update']);
     Route::get('/show/{id}', [StudentController::class, 'show']);
     Route::delete('/delete/{id}', [StudentController::class, 'destroy']);
+});
+Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::ADMINISTRATOR->value], 'prefix' => 'guardian'], function () {
+    Route::post('/create', [GuardianController::class, 'create']);
+    Route::put('/update/{student_id}/{guardian_user_id}', [GuardianController::class, 'update']);
 });

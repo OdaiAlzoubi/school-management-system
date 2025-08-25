@@ -6,6 +6,7 @@ use App\Enum\GenderEnum;
 use App\Enum\RoleEnum;
 use App\Observers\UserObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -81,5 +82,10 @@ class User extends Authenticatable implements LaratrustUser
     public function student(): HasOne
     {
         return $this->hasOne(Student::class);
+    }
+
+    public function guardianStudents(): BelongsToMany
+    {
+        return $this->belongsToMany(Student::class, 'student_guardian', 'guardian_user_id', 'student_id')->withPivot('relation', 'is_primary');
     }
 }

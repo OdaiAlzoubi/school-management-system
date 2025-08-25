@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use App\Enum\EnrollmentStatusEnum;
-use App\Enum\GenderEnum;
-use App\Enum\RoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use App\Observers\StudentObserver;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
 class Student extends Model
@@ -53,5 +52,10 @@ class Student extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function guardians(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'student_guardian', 'student_id', 'guardian_user_id')->withPivot('relation', 'is_primary');
     }
 }

@@ -48,7 +48,6 @@ class GuardianUpdateRequest extends FormRequest
 
         // Table Guardian
         $rules['student_id'] = ['required', 'exists:students,id'];
-        $rules['guardian_user_id'] = ['required', 'exists:users,id'];
         $rules['relation'] = ['nullable', 'string', 'max:255'];
         $rules['is_primary'] = ['required', 'boolean'];
         return $rules;
