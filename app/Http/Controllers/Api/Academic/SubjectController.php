@@ -3,47 +3,36 @@
 namespace App\Http\Controllers\Api\Academic;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Subject\SubjectStoreRequest;
+use App\Http\Requests\Subject\SubjectUpdateRequest;
+use App\Services\Academic\SubjectService;
+use Soft\ApiResponse\Factories\ApiResponseFactory;
 
 class SubjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(protected SubjectService $subjectService) {}
+
+    public function store(SubjectStoreRequest $request)
     {
-        //
+        return $this->handleApi(function () use ($request) {
+            $subject = $this->subjectService->store($request->validated());
+            return ApiResponseFactory::success()->data($subject)->message('Subject created successfully.')->code(201)->toJson();
+        });
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(SubjectUpdateRequest $request, $id)
     {
-        //
+        return $this->handleApi(function () use ($request, $id) {
+            $subject = $this->subjectService->update($request->validated(), $id);
+            return ApiResponseFactory::success()->data($subject)->message('Subject updated successfully.')->code(200)->toJson();
+        });
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $this->handleApi(function () use ($id) {
+            $this->subjectService->delete($id);
+            return ApiResponseFactory::success()->message('Subject deleted successfully.')->code(200)->toJson();
+        });
     }
 }
