@@ -3,47 +3,36 @@
 namespace App\Http\Controllers\Api\Academic;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\Academic\GradeService;
+use App\Http\Requests\Grade\GradeStoreRequest;
+use App\Http\Requests\Grade\GradeUpdateRequest;
+use Soft\ApiResponse\Factories\ApiResponseFactory;
 
 class GradeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(protected GradeService $gradeService) {}
+
+    public function store(GradeStoreRequest $request)
     {
-        //
+        return $this->handleApi(function () use ($request) {
+            $grade = $this->gradeService->store($request->validated());
+            return ApiResponseFactory::success()->data($grade)->message('Grade created successfully.')->code(201)->toJson();
+        });
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(GradeUpdateRequest $request, int $id)
     {
-        //
+        return $this->handleApi(function () use ($request, $id) {
+            $grade = $this->gradeService->update($request->validated(), $id);
+            return ApiResponseFactory::success()->data($grade)->message('Grade updated successfully.')->code(200)->toJson();
+        });
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy(int $id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $this->handleApi(function () use ($id) {
+            $this->gradeService->delete($id);
+            return ApiResponseFactory::success()->message('Grade deleted successfully.')->code(200)->toJson();
+        });
     }
 }

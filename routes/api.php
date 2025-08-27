@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\School\StudentController;
 use App\Http\Controllers\Api\School\GuardianController;
 use App\Http\Controllers\Api\School\TeacherController;
+use App\Http\Controllers\Api\Academic\GradeController;
 
 
 Route::post('/register', [RegisterController::class, 'register']);
@@ -28,5 +29,10 @@ Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::AD
     Route::group(['prefix' => 'teacher'], function () {
         Route::post('/create', [TeacherController::class, 'create']);
         Route::put('/update/{id}', [TeacherController::class, 'update']);
+    });
+    Route::group(['prefix' => 'grade'], function () {
+        Route::post('/create', [GradeController::class, 'store']);
+        Route::put('/update/{id}', [GradeController::class, 'update']);
+        Route::delete('/delete/{id}', [GradeController::class, 'destroy']);
     });
 });
