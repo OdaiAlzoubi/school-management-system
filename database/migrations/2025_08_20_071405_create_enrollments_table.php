@@ -22,7 +22,8 @@ return new class extends Migration
             $table->date('graduation_date')->nullable();
             $table->text('reason')->nullable();
             $table->timestamps();
-
+            $table->softDeletes();
+            
             $table->unique(['student_id', 'academic_year_id'], 'enrollment_unique_per_year');
 
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');

@@ -5,7 +5,6 @@ namespace App\Enum;
 enum EnrollmentStatusEnum :string
 {
     case ACTIVE = 'active';
-    case GRADUATED = 'graduated';
+    case COMPLETED = 'completed';
     case WITHDRAWN = 'withdrawn';
-    case SUSPENDED = 'suspended';
 }
