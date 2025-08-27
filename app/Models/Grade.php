@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Section;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Grade extends Model
 {
@@ -32,4 +34,9 @@ class Grade extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function sections(): HasMany
+    {
+        return $this->hasMany(Section::class);
+    }
 }
