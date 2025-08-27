@@ -4,10 +4,11 @@ use App\Enum\RoleEnum;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
-use App\Http\Controllers\Api\School\StudentController;
-use App\Http\Controllers\Api\School\GuardianController;
-use App\Http\Controllers\Api\School\TeacherController;
 use App\Http\Controllers\Api\Academic\GradeController;
+use App\Http\Controllers\Api\School\StudentController;
+use App\Http\Controllers\Api\School\TeacherController;
+use App\Http\Controllers\Api\School\GuardianController;
+use App\Http\Controllers\Api\Academic\SectionController;
 
 
 Route::post('/register', [RegisterController::class, 'register']);
@@ -34,5 +35,10 @@ Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::AD
         Route::post('/create', [GradeController::class, 'store']);
         Route::put('/update/{id}', [GradeController::class, 'update']);
         Route::delete('/delete/{id}', [GradeController::class, 'destroy']);
+    });
+    Route::group(['prefix' => 'section'], function () {
+        Route::post('/create', [SectionController::class, 'store']);
+        Route::put('/update/{id}', [SectionController::class, 'update']);
+        Route::delete('/delete/{id}', [SectionController::class, 'destroy']);
     });
 });

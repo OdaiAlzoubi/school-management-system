@@ -3,47 +3,36 @@
 namespace App\Http\Controllers\Api\Academic;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\Academic\SectionService;
+use App\Http\Requests\Section\SectionStoreRequest;
+use App\Http\Requests\Section\SectionUpdateRequest;
+use Soft\ApiResponse\Factories\ApiResponseFactory;
 
 class SectionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(protected SectionService $sectionService) {}
+
+    public function store(SectionStoreRequest $request)
     {
-        //
+        return $this->handleApi(function () use ($request) {
+            $section = $this->sectionService->store($request->validated());
+            return ApiResponseFactory::success()->data($section)->message('Section created successfully.')->code(201)->toJson();
+        });
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(SectionUpdateRequest $request, int $id)
     {
-        //
+        return $this->handleApi(function () use ($request, $id) {
+            $section = $this->sectionService->update($request->validated(), $id);
+            return ApiResponseFactory::success()->data($section)->message('Section updated successfully.')->code(200)->toJson();
+        });
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy(int $id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $this->handleApi(function () use ($id) {
+            $this->sectionService->delete($id);
+            return ApiResponseFactory::success()->message('Section deleted successfully.')->code(200)->toJson();
+        });
     }
 }
