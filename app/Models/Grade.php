@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Section;
+use App\Models\Subject;
+use App\Models\Enrollment;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -43,5 +45,10 @@ class Grade extends Model
     public function subjects(): HasMany
     {
         return $this->hasMany(Subject::class);
+    }
+
+    public function enrollments(): HasMany
+    {
+        return $this->hasMany(Enrollment::class);
     }
 }
