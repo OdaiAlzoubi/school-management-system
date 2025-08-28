@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Observers\StudentObserver;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Student extends Model
@@ -57,5 +58,10 @@ class Student extends Model
     public function guardians(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'student_guardian', 'student_id', 'guardian_user_id')->withPivot('relation', 'is_primary');
+    }
+
+    public function enrollments(): HasMany
+    {
+        return $this->hasMany(Enrollment::class);
     }
 }
