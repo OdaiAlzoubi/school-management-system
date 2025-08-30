@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\School\TeacherController;
 use App\Http\Controllers\Api\School\GuardianController;
 use App\Http\Controllers\Api\Academic\SectionController;
 use App\Http\Controllers\Api\Academic\SubjectController;
+use App\Http\Controllers\Api\Academic\EnrollmentController;
 use App\Http\Controllers\Api\Academic\AcademicYearController;
 
 Route::post('/register', [RegisterController::class, 'register']);
@@ -51,5 +52,10 @@ Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::AD
         Route::post('/create', [AcademicYearController::class, 'store']);
         Route::put('/update/{id}', [AcademicYearController::class, 'update']);
         Route::delete('/delete/{id}', [AcademicYearController::class, 'destroy']);
+    });
+    Route::group(['prefix' => 'enrollment'], function () {
+        Route::post('/create', [EnrollmentController::class, 'store']);
+        Route::put('/update/{id}', [EnrollmentController::class, 'update']);
+        Route::delete('/delete/{id}', [EnrollmentController::class, 'destroy']);
     });
 });

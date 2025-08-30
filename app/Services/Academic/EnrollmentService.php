@@ -2,6 +2,7 @@
 
 namespace App\Services\Academic;
 
+use App\Models\Enrollment;
 use App\Repositories\Interface\EnrollmentRepositoryInterface;
 
 

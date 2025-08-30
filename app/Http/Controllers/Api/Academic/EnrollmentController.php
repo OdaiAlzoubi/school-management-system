@@ -3,47 +3,36 @@
 namespace App\Http\Controllers\Api\Academic;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Enrollment\EnrollmentStoreRequest;
+use App\Http\Requests\Enrollment\EnrollmentUpdateRequest;
+use App\Services\Academic\EnrollmentService;
+use Soft\ApiResponse\Factories\ApiResponseFactory;
 
 class EnrollmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(protected EnrollmentService $enrollmentService) {}
+
+    public function store(EnrollmentStoreRequest $request)
     {
-        //
+        return $this->handleApi(function () use ($request) {
+            $enrollment = $this->enrollmentService->store($request->validated());
+            return ApiResponseFactory::success()->data($enrollment)->message('Enrollment created successfully.')->code(201)->toJson();
+        });
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(EnrollmentUpdateRequest $request, int $id)
     {
-        //
+        return $this->handleApi(function () use ($request, $id) {
+            $enrollment = $this->enrollmentService->update($request->validated(), $id);
+            return ApiResponseFactory::success()->data($enrollment)->message('Enrollment updated successfully.')->code(200)->toJson();
+        });
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy(int $id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $this->handleApi(function () use ($id) {
+            $this->enrollmentService->delete($id);
+            return ApiResponseFactory::success()->message('Enrollment deleted successfully.')->code(200)->toJson();
+        });
     }
 }
