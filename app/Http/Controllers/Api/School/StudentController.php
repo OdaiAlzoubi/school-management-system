@@ -26,7 +26,7 @@ class StudentController extends Controller
         return $this->handleApi(function () use ($request) {
             $data = $request->validated();
             $student = $this->studentService->create($data);
-            return ApiResponseFactory::success()->data($student)->code(201)->toJson();
+            return ApiResponseFactory::success()->data($student)->message('Student created successfully.')->code(201)->toJson();
         });
     }
 
@@ -38,7 +38,7 @@ class StudentController extends Controller
             if (!$student)
                 return ApiResponseFactory::error()->message('Student not found.')->code(404)->toJson();
             $student = $this->studentService->update($data, $student->id);
-            return ApiResponseFactory::success()->data($student->user)->message('Student updated successfully.')->code(200)->toJson();
+            return ApiResponseFactory::success()->data($student)->message('Student updated successfully.')->code(200)->toJson();
         });
     }
 
@@ -59,7 +59,23 @@ class StudentController extends Controller
             if (!$student)
                 return ApiResponseFactory::error()->message('Student not found.')->code(404)->toJson();
             $student = $this->studentService->delete($student->id);
-            return ApiResponseFactory::success()->message('delete')->code(200)->toJson();
+            return ApiResponseFactory::success()->message('Student deleted successfully.')->code(200)->toJson();
+        });
+    }
+
+    public function onlyTrashed()
+    {
+        return $this->handleApi(function () {
+            $students = $this->studentService->onlyTrashed();
+            return ApiResponseFactory::success()->data($students)->code(200)->toJson();
+        });
+    }
+
+    public function restore($id)
+    {
+        return $this->handleApi(function () use ($id) {
+            $student = $this->studentService->restore($id);
+            return ApiResponseFactory::success()->data($student)->message('Student restored successfully.')->code(200)->toJson();
         });
     }
 }

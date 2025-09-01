@@ -31,4 +31,10 @@ class UserService
         $user->delete();
         return $user;
     }
+
+    public function restore($id)
+    {
+        $user = User::onlyTrashed()->where('id', $id)->restore();
+        return $user;
+    }
 }

@@ -36,4 +36,14 @@ class StudentRepository extends RepositoryBase implements StudentRepositoryInter
             $query->where('current_section_id', $data['current_section_id']);
         return $query->get();
     }
+
+    public function onlyTrashed()
+    {
+        return $this->model->onlyTrashed()->get();
+    }
+
+    public function restore($id)
+    {
+        return $this->model->onlyTrashed()->where('id', $id)->restore();
+    }
 }

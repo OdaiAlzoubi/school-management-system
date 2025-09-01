@@ -2,8 +2,8 @@
 
 namespace App\Services\School;
 
-use Illuminate\Support\Facades\DB;
 use App\Repositories\Interface\StudentRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class StudentService
 {
@@ -27,7 +27,7 @@ class StudentService
     public function update(array $data, int $id)
     {
         DB::beginTransaction();
-        $data['user_id'] = $this->studentRepository->findOrFail($id)->user_id;
+        $data['user_id'] = $this->studentRepository->findOrFail($id)->user->id;
         $this->userService->update($data['user'], $data['user_id']);
         return $this->studentRepository->update($data, $id);
         DB::commit();
@@ -52,7 +52,20 @@ class StudentService
     public function delete($id)
     {
         $student = $this->studentRepository->findOrFail($id);
-        $this->userService->destroy($student->user_id);
+        $this->userService->destroy($student->user->id);
         return $this->studentRepository->delete($id);
+    }
+
+    public function onlyTrashed()
+    {
+        return $this->studentRepository->onlyTrashed();
+    }
+
+    public function restore($id)
+    {
+        $student = $this->studentRepository->onlyTrashed()->findOrFail($id);
+        $this->userService->restore($student->user->id);
+        $this->studentRepository->restore($id);
+        return $student;
     }
 }

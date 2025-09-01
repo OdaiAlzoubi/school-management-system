@@ -24,6 +24,8 @@ Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::AD
         Route::put('/update/{id}', [StudentController::class, 'update']);
         Route::get('/show/{id}', [StudentController::class, 'show']);
         Route::delete('/delete/{id}', [StudentController::class, 'destroy']);
+        Route::get('/onlyTrashed', [StudentController::class, 'onlyTrashed']);
+        Route::put('/restore/{id}', [StudentController::class, 'restore']);
     });
     Route::group(['prefix' => 'guardian'], function () {
         Route::post('/create', [GuardianController::class, 'create']);
