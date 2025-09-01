@@ -33,9 +33,10 @@ class StudentStoreRequest extends FormRequest
         $rules['first_name'] = ['required', 'string', 'max:30'];
         $rules['middle_name'] = ['required', 'string', 'max:30'];
         $rules['last_name'] = ['required', 'string', 'max:30'];
-        $rules['national_number'] = ['required', 'string', 'max:255', 'unique:users,national_number'];
+        $rules['national_number'] = ['required', 'numeric', 'unique:users,national_number'];
         $rules['date_of_birth'] = ['required', 'date'];
         $rules['is_active'] = ['required', 'boolean'];
+        $rules['nationality'] = ['nullable', 'string', 'max:30'];
         $rules['address'] = ['required', 'array'];
         $rules['address.country'] = ['required', 'string', 'max:255'];
         $rules['address.city'] = ['required', 'string', 'max:255'];

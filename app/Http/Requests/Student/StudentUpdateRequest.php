@@ -42,7 +42,7 @@ class StudentUpdateRequest extends FormRequest
         $rules['national_number'] = ['required', 'string', 'max:30', 'unique:users,national_number,' . $userId];
         $rules['date_of_birth'] = ['required', 'date'];
         $rules['is_active'] = ['required', 'boolean'];
-        $rules['nationality'] = ['required', 'string', 'max:30'];
+        $rules['nationality'] = ['nullable', 'string', 'max:30'];
         $rules['role'] = ['required', 'in:' . RoleEnum::STUDENT->value];
         $rules['gender'] = ['required', Rule::enum(GenderEnum::class)];
         $rules['address'] = ['required', 'array'];

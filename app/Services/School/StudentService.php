@@ -51,6 +51,8 @@ class StudentService
 
     public function delete($id)
     {
+        $student = $this->studentRepository->findOrFail($id);
+        $this->userService->destroy($student->user_id);
         return $this->studentRepository->delete($id);
     }
 }

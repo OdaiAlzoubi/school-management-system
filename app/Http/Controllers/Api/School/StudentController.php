@@ -24,7 +24,7 @@ class StudentController extends Controller
     public function store(StudentStoreRequest $request)
     {
         return $this->handleApi(function () use ($request) {
-            $data = $request->validated()['user'];
+            $data = $request->validated();
             $student = $this->studentService->create($data);
             return ApiResponseFactory::success()->data($student)->code(201)->toJson();
         });
@@ -38,7 +38,7 @@ class StudentController extends Controller
             if (!$student)
                 return ApiResponseFactory::error()->message('Student not found.')->code(404)->toJson();
             $student = $this->studentService->update($data, $student->id);
-            return ApiResponseFactory::success()->data($student->user)->code(200)->toJson();
+            return ApiResponseFactory::success()->data($student->user)->message('Student updated successfully.')->code(200)->toJson();
         });
     }
 
