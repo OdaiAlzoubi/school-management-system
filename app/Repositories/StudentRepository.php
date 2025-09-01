@@ -34,6 +34,18 @@ class StudentRepository extends RepositoryBase implements StudentRepositoryInter
             $query->where('nationality', $data['nationality']);
         if (isset($data['current_section_id']))
             $query->where('current_section_id', $data['current_section_id']);
+        if (isset($data['gender']))
+            $query->whereHas('user', function ($query) use ($data) {
+                $query->where('gender', $data['gender']);
+            });
+        if (isset($data['is_active']))
+            $query->whereHas('user', function ($query) use ($data) {
+                $query->where('is_active', $data['is_active']);
+            });
+        if (isset($data['country']))
+            $query->whereHas('user', function ($query) use ($data) {
+                $query->where('address->country', $data['country']);
+            });
         return $query->get();
     }
 

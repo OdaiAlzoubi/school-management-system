@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Student;
 
+use App\Enum\GenderEnum;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StudentFilterRequest extends FormRequest
@@ -27,6 +29,9 @@ class StudentFilterRequest extends FormRequest
         $rules['enrollment_status'] = ['nullable', 'exists:students,enrollment_status'];
         $rules['nationality'] = ['nullable', 'exists:students,nationality'];
         $rules['current_section_id'] = ['nullable', 'exists:students,current_section_id'];
+        $rules['gender'] = ['nullable', Rule::enum(GenderEnum::class)];
+        $rules['is_active'] = ['nullable', 'boolean'];
+        $rules['country'] = ['nullable', 'string'];
         return $rules;
     }
 }
