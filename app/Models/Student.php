@@ -64,4 +64,14 @@ class Student extends Model
     {
         return $this->hasMany(Enrollment::class);
     }
+
+    public function currentGrade(): BelongsTo
+    {
+        return $this->belongsTo(Grade::class, 'current_grade_id');
+    }
+
+    public function currentSection(): BelongsTo
+    {
+        return $this->belongsTo(Section::class, 'current_section_id');
+    }
 }
