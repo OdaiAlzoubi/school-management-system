@@ -17,7 +17,7 @@ class LoginController extends Controller
                 return ApiResponseFactory::error()->message('Invalid credentials')->code(401)->toJson();
             $user = Auth::user();
             $token = $user->createToken('auth_token')->plainTextToken;
-            return ApiResponseFactory::success()->data(['token' => $token])->code(200)->toJson();
+            return ApiResponseFactory::success()->data(['token' => $token,'role'=>$user->roles->first()->name])->code(200)->toJson();
         });
     }
     public function logout()
