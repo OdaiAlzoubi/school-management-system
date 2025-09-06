@@ -7,14 +7,22 @@ use App\Repositories\Interface\GradeRepositoryInterface;
 
 class GradeService
 {
-    public function __construct(protected GradeRepositoryInterface $gradeRepository) {}
+    public function __construct(protected GradeRepositoryInterface $gradeRepository, protected SectionService $sectionService) {}
 
-    public function index(){
+    public function index()
+    {
         return $this->gradeRepository->all();
     }
     public function store(array $data)
     {
-        return $this->gradeRepository->create($data);
+        $grade = $this->gradeRepository->create($data);
+        if (isset($data['sections'])) {
+            foreach ($data['sections'] as $index => $value) {
+                $value['grade_id'] = $grade->id;
+                $this->sectionService->store($value);
+            }
+        }
+        return $grade;
     }
 
     public function update(array $data, $id)

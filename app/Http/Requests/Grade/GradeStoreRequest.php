@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Grade;
 
+use App\Http\Requests\Section\SectionStoreRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GradeStoreRequest extends FormRequest
@@ -26,6 +27,16 @@ class GradeStoreRequest extends FormRequest
         $rules['code'] = ['nullable', 'string', 'max:5', 'unique:grades,code'];
         $rules['description'] = ['nullable', 'string', 'max:255'];
         $rules['order'] = ['required', 'integer'];
+        $rules['sections'] = ['nullable', 'array'];
+        if (request()->has('sections')) {
+            $rulesSection = (new SectionStoreRequest())->rules();
+            foreach ($rulesSection as $key => $value) {
+                if ($key == 'grade_id')
+                    continue;
+                $rules['sections.*.' . $key] = $value;
+            }
+        }
+
         return $rules;
     }
 }
