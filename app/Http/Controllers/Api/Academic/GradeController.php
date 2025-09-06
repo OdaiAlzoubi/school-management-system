@@ -7,11 +7,18 @@ use App\Services\Academic\GradeService;
 use App\Http\Requests\Grade\GradeStoreRequest;
 use App\Http\Requests\Grade\GradeUpdateRequest;
 use Soft\ApiResponse\Factories\ApiResponseFactory;
+use Illuminate\Http\Request;
 
 class GradeController extends Controller
 {
     public function __construct(protected GradeService $gradeService) {}
 
+    public function index(Request $request){
+        return $this->handleApi(function () use ($request) {
+            $grades = $this->gradeService->index();
+            return ApiResponseFactory::success()->data($grades)->code(200)->toJson();
+        });
+    }
     public function store(GradeStoreRequest $request)
     {
         return $this->handleApi(function () use ($request) {
