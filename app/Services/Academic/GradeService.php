@@ -11,7 +11,9 @@ class GradeService
 
     public function index()
     {
-        return $this->gradeRepository->all();
+        $grades = $this->gradeRepository->all();
+
+        return $grades;
     }
     public function store(array $data)
     {

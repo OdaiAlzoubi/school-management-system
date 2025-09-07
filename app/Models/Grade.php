@@ -31,6 +31,8 @@ class Grade extends Model
         });
     }
 
+    protected $with = ['sections'];
+    protected $withCount = ['sections'];
     protected $hidden = [
         'created_at',
         'updated_at',
