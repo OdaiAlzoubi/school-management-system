@@ -36,7 +36,6 @@ class GradeStoreRequest extends FormRequest
                 $rules['sections.*.' . $key] = $value;
             }
         }
-
         return $rules;
     }
 }

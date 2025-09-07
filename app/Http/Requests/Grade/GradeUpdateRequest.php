@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Grade;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Section\SectionUpdateRequest;
 
 class GradeUpdateRequest extends FormRequest
 {
@@ -26,6 +27,16 @@ class GradeUpdateRequest extends FormRequest
         $rules['code'] = ['nullable', 'string', 'max:5', 'unique:grades,code,' . $this->id];
         $rules['description'] = ['nullable', 'string', 'max:255'];
         $rules['order'] = ['required', 'integer'];
+        $rules['sections'] = ['nullable', 'array'];
+        if (request()->has('sections')) {
+            $rulesSection = (new SectionUpdateRequest())->rules();
+            foreach ($rulesSection as $key => $value) {
+                $rules['sections.*.' .'id'] = ['nullable', 'integer', 'exists:sections,id'];
+                if ($key == 'grade_id')
+                    continue;
+                $rules['sections.*.' . $key] = $value;
+            }
+        }
         return $rules;
     }
 }

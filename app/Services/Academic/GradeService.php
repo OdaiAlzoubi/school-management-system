@@ -15,6 +15,7 @@ class GradeService
         $grades = $this->gradeRepository->all();
         return $grades;
     }
+    
     public function store(array $data)
     {
         return DB::transaction(function () use ($data) {
@@ -49,7 +50,7 @@ class GradeService
         });
     }
 
-    private function syncSections($gradeId, $sections)
+    protected function syncSections($gradeId, $sections): void
     {
         foreach ($sections as $section) {
             $section['grade_id'] = $gradeId;
