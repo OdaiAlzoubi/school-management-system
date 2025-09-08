@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::AD
         Route::delete('/delete/{id}', [SectionController::class, 'destroy']);
     });
     Route::group(['prefix' => 'subject'], function () {
+        Route::get('/', [SubjectController::class, 'index']);
         Route::post('/create', [SubjectController::class, 'store']);
         Route::put('/update/{id}', [SubjectController::class, 'update']);
         Route::delete('/delete/{id}', [SubjectController::class, 'destroy']);

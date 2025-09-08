@@ -44,7 +44,7 @@ class Section extends Model
     {
         return [
             'shift' => ShiftEnum::class,
-            'is_active' => 'boolean',
+            // 'is_active' => 'boolean',
         ];
     }
 

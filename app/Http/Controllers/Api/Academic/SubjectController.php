@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers\Api\Academic;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Subject\SubjectStoreRequest;
-use App\Http\Requests\Subject\SubjectUpdateRequest;
 use App\Services\Academic\SubjectService;
+use App\Http\Requests\Subject\SubjectStoreRequest;
 use Soft\ApiResponse\Factories\ApiResponseFactory;
+use App\Http\Requests\Subject\SubjectUpdateRequest;
 
 class SubjectController extends Controller
 {
     public function __construct(protected SubjectService $subjectService) {}
+
+    public function index(Request $request)
+    {
+        return $this->handleApi(function () use ($request) {
+            $subjects = $this->subjectService->index();
+            return ApiResponseFactory::success()->data($subjects)->code(200)->toJson();
+        });
+    }
 
     public function store(SubjectStoreRequest $request)
     {
