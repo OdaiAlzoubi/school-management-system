@@ -8,9 +8,9 @@ class SubjectService
 {
     public function __construct(protected SubjectRepositoryInterface $subjectRepository) {}
 
-    public function index()
+    public function index(array $data)
     {
-        $subjects = $this->subjectRepository->all();
+        $subjects = $this->subjectRepository->filter($data);
         return $subjects;
     }
 

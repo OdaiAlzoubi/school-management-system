@@ -8,15 +8,16 @@ use App\Services\Academic\SubjectService;
 use App\Http\Requests\Subject\SubjectStoreRequest;
 use Soft\ApiResponse\Factories\ApiResponseFactory;
 use App\Http\Requests\Subject\SubjectUpdateRequest;
+use App\Http\Requests\Subject\SubjectFilterRequest;
 
 class SubjectController extends Controller
 {
     public function __construct(protected SubjectService $subjectService) {}
 
-    public function index(Request $request)
+    public function index(SubjectFilterRequest $request)
     {
         return $this->handleApi(function () use ($request) {
-            $subjects = $this->subjectService->index();
+            $subjects = $this->subjectService->index($request->validated());
             return ApiResponseFactory::success()->data($subjects)->code(200)->toJson();
         });
     }
