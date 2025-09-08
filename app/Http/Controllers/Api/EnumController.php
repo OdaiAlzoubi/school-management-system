@@ -3,9 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\EnumService;
+use Soft\ApiResponse\Factories\ApiResponseFactory;
 
 class EnumController extends Controller
 {
-    //
+    public function __construct(protected EnumService $enumService) {}
+
+    public function shifts()
+    {
+        return $this->handleApi(function () {
+            $shifts = $this->enumService->getShifts();
+            return ApiResponseFactory::success()->data($shifts)->code(200)->toJson();
+        });
+    }
 }

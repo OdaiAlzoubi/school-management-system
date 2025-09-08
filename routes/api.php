@@ -2,6 +2,7 @@
 
 use App\Enum\RoleEnum;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\EnumController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Academic\GradeController;
@@ -18,7 +19,9 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::ADMINISTRATOR->value]], function () {
-    Route::group(['prefix' => 'enums'], function () {});
+    Route::group(['prefix' => 'enums'], function () {
+        Route::get('/shifts', [EnumController::class, 'shifts']);
+    });
     Route::group(['prefix' => 'student'], function () {
         Route::get('/', [StudentController::class, 'index']);
         Route::post('/create', [StudentController::class, 'store']);
