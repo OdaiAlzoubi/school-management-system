@@ -18,6 +18,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::ADMINISTRATOR->value]], function () {
+    Route::group(['prefix' => 'enums'], function () {});
     Route::group(['prefix' => 'student'], function () {
         Route::get('/', [StudentController::class, 'index']);
         Route::post('/create', [StudentController::class, 'store']);
