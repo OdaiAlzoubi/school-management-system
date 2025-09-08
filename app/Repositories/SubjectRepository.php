@@ -30,6 +30,6 @@ class SubjectRepository extends RepositoryBase implements SubjectRepositoryInter
             $query->where('created_at', '>=', $data['start_date']);
         elseif (isset($data['end_date']))
             $query->where('created_at', '<=', $data['end_date']);
-        return $query->get();
+        return $query->with(['grade:id,name'])->get();
     }
 }

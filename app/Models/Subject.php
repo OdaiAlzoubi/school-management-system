@@ -30,15 +30,16 @@ class Subject extends Model
         'is_offered',
         'min_passing_score',
     ];
+    // protected $with = ['grade'];
 
     protected function casts(): array
     {
         return [
             'assessment_weights' => 'json',
             'type' => SubjectTypeEnum::class,
-            'is_active' => 'boolean',
-            'is_offered' => 'boolean',
-            'prerequisite_required' => 'boolean',
+            // 'is_active' => 'boolean',
+            // 'is_offered' => 'boolean',
+            // 'prerequisite_required' => 'boolean',
         ];
     }
 

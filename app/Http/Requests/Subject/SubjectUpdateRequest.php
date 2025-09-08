@@ -24,17 +24,17 @@ class SubjectUpdateRequest extends FormRequest
     public function rules(): array
     {
         $rules = [];
-        $rules['code'] = ['required', 'string', 'max:30', 'unique:subjects,code'];
+        $rules['code'] = ['required', 'string', 'max:30', 'unique:subjects,code,' . $this->id];
         $rules['name'] = ['required', 'string', 'max:50'];
         $rules['description'] = ['nullable', 'string'];
         $rules['is_active'] = ['required', 'boolean'];
         $rules['is_offered'] = ['required', 'boolean'];
-        $rules['prerequisite_required'] = ['required', 'boolean'];
+        $rules['prerequisite_required'] = ['nullable', 'boolean'];
         $rules['grade_id'] = ['required', 'integer', 'exists:grades,id'];
         $rules['type'] = ['required', Rule::enum(SubjectTypeEnum::class)];
-        $rules['credit_hours'] = ['required', 'integer'];
-        $rules['theory_hours'] = ['required', 'integer'];
-        $rules['practice_hours'] = ['required', 'integer'];
+        $rules['credit_hours'] = ['nullable', 'integer'];
+        $rules['theory_hours'] = ['nullable', 'integer'];
+        $rules['practice_hours'] = ['nullable', 'integer'];
         $rules['assessment_weights'] = ['nullable', 'array'];
         $rules['min_passing_score'] = ['required', 'integer'];
         return $rules;
