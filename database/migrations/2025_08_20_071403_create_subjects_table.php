@@ -20,11 +20,11 @@ return new class extends Migration
             $table->unsignedBigInteger('grade_id')->nullable();
             $table->unsignedBigInteger('department_id')->nullable();
             $table->enum('type', ['core', 'elective', 'optional'])->default('core');
-            $table->decimal('credit_hours', 5, 2)->default(0);
-            $table->unsignedInteger('theory_hours')->default(0);
-            $table->unsignedInteger('practice_hours')->default(0);
+            $table->decimal('credit_hours', 5, 2)->default(0)->nullable();
+            $table->unsignedInteger('theory_hours')->default(0)->nullable();
+            $table->unsignedInteger('practice_hours')->default(0)->nullable();
             $table->json('assessment_weights')->nullable();
-            $table->boolean('prerequisite_required')->default(false);
+            $table->boolean('prerequisite_required')->default(false)->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_offered')->default(true);
             $table->unsignedInteger('min_passing_score')->default(50);
