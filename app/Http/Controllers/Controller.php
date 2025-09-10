@@ -6,37 +6,10 @@ use Throwable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Soft\ApiResponse\Factories\ApiResponseFactory;
-
 abstract class Controller
 {
     protected function handleApi(\Closure $callback): JsonResponse
     {
-        // try {
-        //     return $callback();
-        // } catch (ValidationException $e) {
-        //     $this->logError($e);
-        //     return ApiResponseFactory::error()
-        //         ->message('Validation failed.')
-        //         // ->errors($e->errors())
-        //         ->code(422)
-        //         ->toJson();
-        // } catch (NotFoundHttpException $e) {
-        //     $this->logError($e);
-        //     return ApiResponseFactory::error()
-        //         ->message('Resource not found.')
-        //         ->code(404)
-        //         ->toJson();
-        // } catch (Throwable $e) {
-        //     $this->logError($e);
-        //     $message = app()->environment('production')
-        //         ? 'Something went wrong. Please try again later.'
-        //         : $e->getMessage();
-
-        //     return ApiResponseFactory::error()
-        //         ->message($message)
-        //         ->code(500)
-        //         ->toJson();
-        // }
         try {
             return $callback();
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -58,7 +31,7 @@ abstract class Controller
         }
     }
 
-    private function handleException(\Throwable $e, int $code, string $defaultMessage, $errors = null): JsonResponse
+    private function handleException(\Throwable $e, int $code, string $defaultMessage, $errors = []): JsonResponse
     {
         $this->logError($e);
 
@@ -66,10 +39,10 @@ abstract class Controller
             ? 'Something went wrong. Please try again later.'
             : $e->getMessage();
 
-        return ApiResponseFactory::error()
+        return ApiResponseFactory::validationError()
             ->message($defaultMessage ?: $message)
-            // ->errors($errors)
-            ->code($code)
+            ->errors($errors)
+            ->statusCode($code)
             ->toJson();
     }
 

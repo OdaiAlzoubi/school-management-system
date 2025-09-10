@@ -15,14 +15,14 @@ class GuardianController extends Controller
     public function create(GuardianStoreRequest $request){
         return $this->handleApi(function () use ($request){
             $guardian = $this->guardianService->create($request->validated());
-            return ApiResponseFactory::success()->data($guardian)->code(201)->toJson();
+            return ApiResponseFactory::success()->data($guardian)->statusCode(201)->toJson();
         });
     }
 
     public function update(GuardianUpdateRequest $request, int $student_id, int $guardian_user_id){
         return $this->handleApi(function () use ($request, $student_id, $guardian_user_id){
             $guardian = $this->guardianService->update($request->validated(), $student_id, $guardian_user_id);
-            return ApiResponseFactory::success()->data($guardian)->code(200)->toJson();
+            return ApiResponseFactory::success()->data($guardian)->statusCode(200)->toJson();
         });
     }
 }

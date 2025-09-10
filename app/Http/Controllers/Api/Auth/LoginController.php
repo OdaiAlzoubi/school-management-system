@@ -14,17 +14,17 @@ class LoginController extends Controller
         return $this->handleApi(function () use ($request) {
             $data = $request->validated();
             if (!Auth::attempt($data))
-                return ApiResponseFactory::error()->message('Invalid credentials')->code(401)->toJson();
+                return ApiResponseFactory::error()->message('Invalid credentials')->statusCode(401)->toJson();
             $user = Auth::user();
             $token = $user->createToken('auth_token')->plainTextToken;
-            return ApiResponseFactory::success()->data(['token' => $token,'role'=>$user->roles->first()->name])->code(200)->toJson();
+            return ApiResponseFactory::success()->data(['token' => $token,'role'=>$user->roles->first()->name])->statusCode(200)->toJson();
         });
     }
     public function logout()
     {
         return $this->handleApi(function () {
             Auth::user()->tokens()->delete();
-            return ApiResponseFactory::success()->message('User logged out successfully')->code(200)->toJson();
+            return ApiResponseFactory::success()->message('User logged out successfully')->statusCode(200)->toJson();
         });
     }
 }

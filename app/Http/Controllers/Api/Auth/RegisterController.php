@@ -15,7 +15,7 @@ class RegisterController extends Controller
             $data = $request->validated();
             $user = User::create($data);
             $user->addRole($data['role']);
-            return ApiResponseFactory::success()->data($user)->code(201)->toJson();
+            return ApiResponseFactory::success()->data($user)->statusCode(201)->toJson();
         });
     }
 }

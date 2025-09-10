@@ -14,7 +14,7 @@ class EnumController extends Controller
     {
         return $this->handleApi(function () {
             $shifts = $this->enumService->getShifts();
-            return ApiResponseFactory::success()->data($shifts)->code(200)->toJson();
+            return ApiResponseFactory::success()->data($shifts)->statusCode(200)->toJson();
         });
     }
 }

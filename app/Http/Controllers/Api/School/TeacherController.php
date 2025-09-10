@@ -16,7 +16,7 @@ class TeacherController extends Controller
     {
         return $this->handleApi(function () use ($request) {
             $teacher = $this->teacherService->create($request->validated());
-            return ApiResponseFactory::success()->data($teacher)->code(201)->toJson();
+            return ApiResponseFactory::success()->data($teacher)->statusCode(201)->toJson();
         });
     }
 
@@ -24,7 +24,7 @@ class TeacherController extends Controller
     {
         return $this->handleApi(function () use ($request, $id) {
             $teacher = $this->teacherService->update($request->validated(), $id);
-            return ApiResponseFactory::success()->data($teacher)->code(200)->toJson();
+            return ApiResponseFactory::success()->data($teacher)->statusCode(200)->toJson();
         });
     }
 }

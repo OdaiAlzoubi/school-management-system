@@ -18,7 +18,7 @@ class SubjectController extends Controller
     {
         return $this->handleApi(function () use ($request) {
             $subjects = $this->subjectService->index($request->validated());
-            return ApiResponseFactory::success()->data($subjects)->code(200)->toJson();
+            return ApiResponseFactory::success()->data($subjects)->statusCode(200)->toJson();
         });
     }
 
@@ -26,7 +26,7 @@ class SubjectController extends Controller
     {
         return $this->handleApi(function () use ($request) {
             $subject = $this->subjectService->store($request->validated());
-            return ApiResponseFactory::success()->data($subject)->message('Subject created successfully.')->code(201)->toJson();
+            return ApiResponseFactory::success()->data($subject)->message('Subject created successfully.')->statusCode(201)->toJson();
         });
     }
 
@@ -34,7 +34,7 @@ class SubjectController extends Controller
     {
         return $this->handleApi(function () use ($request, $id) {
             $subject = $this->subjectService->update($request->validated(), $id);
-            return ApiResponseFactory::success()->data($subject)->message('Subject updated successfully.')->code(200)->toJson();
+            return ApiResponseFactory::success()->data($subject)->message('Subject updated successfully.')->statusCode(200)->toJson();
         });
     }
 
@@ -42,7 +42,7 @@ class SubjectController extends Controller
     {
         return $this->handleApi(function () use ($id) {
             $this->subjectService->delete($id);
-            return ApiResponseFactory::success()->message('Subject deleted successfully.')->code(200)->toJson();
+            return ApiResponseFactory::success()->message('Subject deleted successfully.')->statusCode(200)->toJson();
         });
     }
 }
