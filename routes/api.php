@@ -18,7 +18,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
 
-Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::ADMINISTRATOR->value]], function () {
+Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::ADMINISTRATOR->value, 'set.locale']], function () {
     Route::group(['prefix' => 'enums'], function () {
         Route::get('/shifts', [EnumController::class, 'shifts']);
     });

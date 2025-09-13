@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\CheckRolePermission;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -15,7 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'role.permission' => CheckRolePermission::class,
-
+            'set.locale' => SetLocale::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

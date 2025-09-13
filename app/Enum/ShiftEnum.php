@@ -10,8 +10,8 @@ enum ShiftEnum: string
     public function label(): string
     {
         return match ($this) {
-            self::MORNING => 'Morning',
-            self::EVENING => 'Evening',
+            self::MORNING => __('enum.morning'),
+            self::EVENING => __('enum.evening'),
         };
     }
 }
