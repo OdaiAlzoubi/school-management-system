@@ -26,7 +26,7 @@ class StudentController extends Controller
         return $this->handleApi(function () use ($request) {
             $data = $request->validated();
             $student = $this->studentService->create($data);
-            return ApiResponseFactory::success()->data($student)->message('Student created successfully.')->statusCode(201)->toJson();
+            return ApiResponseFactory::success()->data($student)->message(__('message.student.student_created_successfully'))->statusCode(201)->toJson();
         });
     }
 
@@ -36,9 +36,9 @@ class StudentController extends Controller
             $data = $request->validated();
             $student = $this->studentService->find($id);
             if (!$student)
-                return ApiResponseFactory::error()->message('Student not found.')->statusCode(404)->toJson();
+                return ApiResponseFactory::error()->message(__('message.student.student_not_found'))->statusCode(404)->toJson();
             $student = $this->studentService->update($data, $student->id);
-            return ApiResponseFactory::success()->data($student)->message('Student updated successfully.')->statusCode(200)->toJson();
+            return ApiResponseFactory::success()->data($student)->message(__('message.student.student_updated_successfully'))->statusCode(200)->toJson();
         });
     }
 
@@ -47,7 +47,7 @@ class StudentController extends Controller
         return $this->handleApi(function () use ($id) {
             $student = $this->studentService->find($id);
             if (!$student)
-                return ApiResponseFactory::error()->message('Student not found.')->statusCode(404)->toJson();
+                return ApiResponseFactory::error()->message(__('message.student.student_not_found'))->statusCode(404)->toJson();
             return ApiResponseFactory::success()->data($student)->statusCode(200)->toJson();
         });
     }
@@ -57,9 +57,9 @@ class StudentController extends Controller
         return $this->handleApi(function () use ($id) {
             $student = $this->studentService->find($id);
             if (!$student)
-                return ApiResponseFactory::error()->message('Student not found.')->statusCode(404)->toJson();
+                return ApiResponseFactory::error()->message(__('message.student.student_not_found'))->statusCode(404)->toJson();
             $student = $this->studentService->delete($student->id);
-            return ApiResponseFactory::success()->message('Student deleted successfully.')->statusCode(200)->toJson();
+            return ApiResponseFactory::success()->message(__('message.student.student_deleted_successfully'))->statusCode(200)->toJson();
         });
     }
 
@@ -75,7 +75,7 @@ class StudentController extends Controller
     {
         return $this->handleApi(function () use ($id) {
             $student = $this->studentService->restore($id);
-            return ApiResponseFactory::success()->data($student)->message('Student restored successfully.')->statusCode(200)->toJson();
+            return ApiResponseFactory::success()->data($student)->message(__('message.student.student_restored_successfully'))->statusCode(200)->toJson();
         });
     }
 }

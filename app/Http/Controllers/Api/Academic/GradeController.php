@@ -23,7 +23,7 @@ class GradeController extends Controller
     {
         return $this->handleApi(function () use ($request) {
             $grade = $this->gradeService->store($request->validated());
-            return ApiResponseFactory::success()->data($grade)->message('Grade created successfully.')->statusCode(201)->toJson();
+            return ApiResponseFactory::success()->data($grade)->message(__('message.grade.grade_created_successfully'))->statusCode(201)->toJson();
         });
     }
 
@@ -31,7 +31,7 @@ class GradeController extends Controller
     {
         return $this->handleApi(function () use ($request, $id) {
             $grade = $this->gradeService->update($request->validated(), $id);
-            return ApiResponseFactory::success()->data($grade)->message('Grade updated successfully.')->statusCode(200)->toJson();
+            return ApiResponseFactory::success()->data($grade)->message(__('message.grade.grade_updated_successfully'))->statusCode(200)->toJson();
         });
     }
 
@@ -39,7 +39,7 @@ class GradeController extends Controller
     {
         return $this->handleApi(function () use ($id) {
             $this->gradeService->delete($id);
-            return ApiResponseFactory::success()->message('Grade deleted successfully.')->statusCode(200)->toJson();
+            return ApiResponseFactory::success()->message(__('message.grade.grade_deleted_successfully'))->statusCode(200)->toJson();
         });
     }
 }

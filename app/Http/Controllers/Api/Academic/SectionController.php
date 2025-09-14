@@ -16,7 +16,7 @@ class SectionController extends Controller
     {
         return $this->handleApi(function () use ($request) {
             $section = $this->sectionService->store($request->validated());
-            return ApiResponseFactory::success()->data($section)->message('Section created successfully.')->statusCode(201)->toJson();
+            return ApiResponseFactory::success()->data($section)->message(__('message.section.section_created_successfully'))->statusCode(201)->toJson();
         });
     }
 
@@ -24,7 +24,7 @@ class SectionController extends Controller
     {
         return $this->handleApi(function () use ($request, $id) {
             $section = $this->sectionService->update($request->validated(), $id);
-            return ApiResponseFactory::success()->data($section)->message('Section updated successfully.')->statusCode(200)->toJson();
+            return ApiResponseFactory::success()->data($section)->message(__('message.section.section_updated_successfully'))->statusCode(200)->toJson();
         });
     }
 
@@ -32,7 +32,7 @@ class SectionController extends Controller
     {
         return $this->handleApi(function () use ($id) {
             $this->sectionService->delete($id);
-            return ApiResponseFactory::success()->message('Section deleted successfully.')->statusCode(200)->toJson();
+            return ApiResponseFactory::success()->message(__('message.section.section_deleted_successfully'))->statusCode(200)->toJson();
         });
     }
 }

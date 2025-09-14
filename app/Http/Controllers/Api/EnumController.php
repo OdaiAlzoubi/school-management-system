@@ -17,4 +17,44 @@ class EnumController extends Controller
             return ApiResponseFactory::success()->data($shifts)->statusCode(200)->toJson();
         });
     }
+
+    public function enrollmentStatus()
+    {
+        return $this->handleApi(function () {
+            $status = $this->enumService->getEnrollmentStatus();
+            return ApiResponseFactory::success()->data($status)->statusCode(200)->toJson();
+        });
+    }
+
+    public function gender()
+    {
+        return $this->handleApi(function () {
+            $gender = $this->enumService->getGender();
+            return ApiResponseFactory::success()->data($gender)->statusCode(200)->toJson();
+        });
+    }
+
+    public function role()
+    {
+        return $this->handleApi(function () {
+            $role = $this->enumService->getRole();
+            return ApiResponseFactory::success()->data($role)->statusCode(200)->toJson();
+        });
+    }
+
+    public function isActive()
+    {
+        return $this->handleApi(function () {
+            $status = $this->enumService->getIsActive();
+            return ApiResponseFactory::success()->data($status)->statusCode(200)->toJson();
+        });
+    }
+
+    public function subjectType()
+    {
+        return $this->handleApi(function () {
+            $type = $this->enumService->getSubjectType();
+            return ApiResponseFactory::success()->data($type)->statusCode(200)->toJson();
+        });
+    }
 }

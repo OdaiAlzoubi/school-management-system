@@ -21,6 +21,11 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:san
 Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::ADMINISTRATOR->value, 'set.locale']], function () {
     Route::group(['prefix' => 'enums'], function () {
         Route::get('/shifts', [EnumController::class, 'shifts']);
+        Route::get('/enrollment-status', [EnumController::class, 'enrollmentStatus']);
+        Route::get('/gender', [EnumController::class, 'gender']);
+        Route::get('/role', [EnumController::class, 'role']);
+        Route::get('/is-active', [EnumController::class, 'isActive']);
+        Route::get('/subject-type', [EnumController::class, 'subjectType']);
     });
     Route::group(['prefix' => 'student'], function () {
         Route::get('/', [StudentController::class, 'index']);
