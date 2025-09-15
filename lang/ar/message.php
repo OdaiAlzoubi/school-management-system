@@ -26,4 +26,10 @@ return [
         'subject_deleted_successfully' => 'تم حذف المادة بنجاح',
         'subject_not_found' => 'المادة غير موجودة',
     ],
+    'academicYear' => [
+        'academic_year_created_successfully' => 'تم إنشاء العام الدراسي بنجاح',
+        'academic_year_updated_successfully' => 'تم تحديث العام الدراسي بنجاح',
+        'academic_year_deleted_successfully' => 'تم حذف العام الدراسي بنجاح',
+        'academic_year_not_found' => 'العام الدراسي غير موجود',
+    ],
 ];

@@ -23,7 +23,7 @@ class AcademicYearController extends Controller
     {
         return $this->handleApi(function () use ($request) {
             $academicYear = $this->academicYearService->store($request->validated());
-            return ApiResponseFactory::success()->data($academicYear)->message('Academic year created successfully.')->statusCode(201)->toJson();
+            return ApiResponseFactory::success()->data($academicYear)->message(__('message.academicYear.academic_year_created_successfully'))->statusCode(201)->toJson();
         });
     }
 
@@ -31,7 +31,7 @@ class AcademicYearController extends Controller
     {
         return $this->handleApi(function () use ($request, $id) {
             $academicYear = $this->academicYearService->update($request->validated(), $id);
-            return ApiResponseFactory::success()->data($academicYear)->message('Academic year updated successfully.')->statusCode(200)->toJson();
+            return ApiResponseFactory::success()->data($academicYear)->message(__('message.academicYear.academic_year_updated_successfully'))->statusCode(200)->toJson();
         });
     }
 
@@ -39,7 +39,7 @@ class AcademicYearController extends Controller
     {
         return $this->handleApi(function () use ($id) {
             $this->academicYearService->delete($id);
-            return ApiResponseFactory::success()->message('Academic year deleted successfully.')->statusCode(200)->toJson();
+            return ApiResponseFactory::success()->message(__('message.academicYear.academic_year_deleted_successfully'))->statusCode(200)->toJson();
         });
     }
 }
