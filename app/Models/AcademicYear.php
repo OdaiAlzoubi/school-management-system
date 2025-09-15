@@ -22,8 +22,8 @@ class AcademicYear extends Model
     protected function casts(): array
     {
         return [
-            'start_date' => 'datetime',
-            'end_date' => 'datetime',
+            'start_date' => 'datetime:d/m/y',
+            'end_date' => 'datetime:d/m/y',
             'is_active' => 'boolean',
         ];
     }
