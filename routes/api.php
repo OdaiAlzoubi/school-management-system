@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::AD
         Route::delete('/delete/{id}', [SubjectController::class, 'destroy']);
     });
     Route::group(['prefix' => 'academic-year'], function () {
+        Route::get('/', [AcademicYearController::class, 'index']);
         Route::post('/create', [AcademicYearController::class, 'store']);
         Route::put('/update/{id}', [AcademicYearController::class, 'update']);
         Route::delete('/delete/{id}', [AcademicYearController::class, 'destroy']);

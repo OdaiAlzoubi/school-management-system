@@ -12,6 +12,13 @@ class AcademicYearController extends Controller
 {
     public function __construct(protected AcademicYearService $academicYearService) {}
 
+    public function index()
+    {
+        return $this->handleApi(function () {
+            $academicYear = $this->academicYearService->index();
+            return ApiResponseFactory::success()->data($academicYear)->statusCode(200)->toJson();
+        });
+    }
     public function store(AcademicYearStoreRequest $request)
     {
         return $this->handleApi(function () use ($request) {

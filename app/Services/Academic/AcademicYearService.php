@@ -9,6 +9,10 @@ class AcademicYearService
 {
     public function __construct(protected AcademicYearRepositoryInterface $academicYearRepository) {}
 
+    public function index()
+    {
+        return $this->academicYearRepository->all();
+    }
     public function store(array $data)
     {
         return $this->academicYearRepository->create($data);
