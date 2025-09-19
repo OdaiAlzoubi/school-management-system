@@ -47,7 +47,7 @@ class Section extends Model
             // 'is_active' => 'boolean',
         ];
     }
-
+    
     public function grade(): BelongsTo
     {
         return $this->belongsTo(Grade::class, 'grade_id');

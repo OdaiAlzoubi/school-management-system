@@ -13,7 +13,8 @@ class GradeController extends Controller
 {
     public function __construct(protected GradeService $gradeService) {}
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         return $this->handleApi(function () use ($request) {
             $grades = $this->gradeService->index();
             return ApiResponseFactory::success()->data($grades)->statusCode(200)->toJson();
@@ -40,6 +41,14 @@ class GradeController extends Controller
         return $this->handleApi(function () use ($id) {
             $this->gradeService->delete($id);
             return ApiResponseFactory::success()->message(__('message.grade.grade_deleted_successfully'))->statusCode(200)->toJson();
+        });
+    }
+
+    public function show($id)
+    {
+        return $this->handleApi(function () use ($id) {
+            $grade = $this->gradeService->show($id);
+            return ApiResponseFactory::success()->data($grade)->statusCode(200)->toJson();
         });
     }
 }

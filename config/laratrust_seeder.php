@@ -31,7 +31,7 @@ return [
         ],
 
         // مدير المدرسة
-        'administrator' => [
+        'director' => [
             'students' => 'c,r,u,d',
             'teachers' => 'c,r,u,d',
             'guardians' => 'c,r,u,d',

@@ -12,6 +12,13 @@ class EnrollmentController extends Controller
 {
     public function __construct(protected EnrollmentService $enrollmentService) {}
 
+    public function index()
+    {
+        return $this->handleApi(function () {
+            $enrollments = $this->enrollmentService->index();
+            return ApiResponseFactory::success()->data($enrollments)->statusCode(200)->toJson();
+        });
+    }
     public function store(EnrollmentStoreRequest $request)
     {
         return $this->handleApi(function () use ($request) {

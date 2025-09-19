@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::AD
         Route::post('/create', [GradeController::class, 'store']);
         Route::put('/update/{id}', [GradeController::class, 'update']);
         Route::delete('/delete/{id}', [GradeController::class, 'destroy']);
+        Route::get('/show/{id}', [GradeController::class, 'show']);
     });
     Route::group(['prefix' => 'section'], function () {
         Route::post('/create', [SectionController::class, 'store']);
@@ -68,6 +69,7 @@ Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::AD
         Route::delete('/delete/{id}', [AcademicYearController::class, 'destroy']);
     });
     Route::group(['prefix' => 'enrollment'], function () {
+        Route::get('/', [EnrollmentController::class, 'index']);
         Route::post('/create', [EnrollmentController::class, 'store']);
         Route::put('/update/{id}', [EnrollmentController::class, 'update']);
         Route::delete('/delete/{id}', [EnrollmentController::class, 'destroy']);
