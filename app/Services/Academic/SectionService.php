@@ -10,6 +10,10 @@ class SectionService
 {
     public function __construct(protected SectionRepositoryInterface $sectionRepository) {}
 
+    public function index()
+    {
+        return $this->sectionRepository->all();
+    }
     public function store(array $data)
     {
         return $this->sectionRepository->create($data);

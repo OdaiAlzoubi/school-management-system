@@ -12,6 +12,13 @@ class SectionController extends Controller
 {
     public function __construct(protected SectionService $sectionService) {}
 
+    public function index()
+    {
+        return $this->handleApi(function () {
+            $sections = $this->sectionService->index();
+            return ApiResponseFactory::success()->data($sections)->toJson();
+        });
+    }
     public function store(SectionStoreRequest $request)
     {
         return $this->handleApi(function () use ($request) {

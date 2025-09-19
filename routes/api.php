@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth:sanctum', 'role.permission:' . RoleEnum::AD
         Route::get('/show/{id}', [GradeController::class, 'show']);
     });
     Route::group(['prefix' => 'section'], function () {
+        Route::get('/', [SectionController::class, 'index']);
         Route::post('/create', [SectionController::class, 'store']);
         Route::put('/update/{id}', [SectionController::class, 'update']);
         Route::delete('/delete/{id}', [SectionController::class, 'destroy']);
