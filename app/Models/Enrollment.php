@@ -31,8 +31,8 @@ class Enrollment extends Model
     {
         return [
             'status' => EnrollmentStatusEnum::class,
-            'admission_date' => 'datetime',
-            'graduation_date' => 'datetime',
+            'admission_date' => 'datetime:Y-m-d',
+            'graduation_date' => 'datetime:Y-m-d',
         ];
     }
 

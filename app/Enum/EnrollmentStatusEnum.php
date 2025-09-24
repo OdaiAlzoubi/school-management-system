@@ -17,11 +17,19 @@ enum EnrollmentStatusEnum: string
         };
     }
 
+    public function color(){
+        return match ($this) {
+            self::ACTIVE => 'success',
+            self::COMPLETED => 'info',
+            self::WITHDRAWN => 'danger',
+        };
+    }
     public function toArray(): array
     {
         return [
             'value' => $this->value,
             'label' => $this->label(),
+            'color' => $this->color(),
         ];
     }
 }

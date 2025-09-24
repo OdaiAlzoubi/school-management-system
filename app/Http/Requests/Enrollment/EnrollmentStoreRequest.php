@@ -24,7 +24,7 @@ class EnrollmentStoreRequest extends FormRequest
     public function rules(): array
     {
         $rules = [];
-        $rules['student_id'] = ['required', 'integer', 'exists:students,id'];
+        $rules['student_id'] = ['required', 'integer', 'exists:students,id', 'unique:enrollments,student_id'];
         $rules['section_id'] = ['required', 'integer', 'exists:sections,id'];
         $rules['academic_year_id'] = ['required', 'integer', 'exists:academic_years,id'];
         $rules['grade_id'] = ['required', 'integer', 'exists:grades,id'];

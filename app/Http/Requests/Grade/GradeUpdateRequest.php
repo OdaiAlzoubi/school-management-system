@@ -22,6 +22,7 @@ class GradeUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        
         $rules = [];
         $rules['name'] = ['required', 'string', 'max:60', 'unique:grades,name,' . $this->id];
         $rules['code'] = ['nullable', 'string', 'max:5', 'unique:grades,code,' . $this->id];

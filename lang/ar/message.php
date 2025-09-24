@@ -32,4 +32,10 @@ return [
         'academic_year_deleted_successfully' => 'تم حذف العام الدراسي بنجاح',
         'academic_year_not_found' => 'العام الدراسي غير موجود',
     ],
+    'enrollment' => [
+        'enrollment_created_successfully' => 'تم إنشاء الإنضمام بنجاح',
+        'enrollment_updated_successfully' => 'تم تحديث الإنضمام بنجاح',
+        'enrollment_deleted_successfully' => 'تم حذف الإنضمام بنجاح',
+        'enrollment_not_found' => 'الإنضمام غير موجود',
+    ],
 ];

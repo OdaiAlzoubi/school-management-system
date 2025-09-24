@@ -12,7 +12,7 @@ class GradeService
 
     public function index()
     {
-        $grades = $this->gradeRepository->all();
+        $grades = $this->gradeRepository->paginate();
         return $grades;
     }
 
