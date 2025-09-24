@@ -10,9 +10,9 @@ class GradeService
 {
     public function __construct(protected GradeRepositoryInterface $gradeRepository, protected SectionService $sectionService) {}
 
-    public function index()
+    public function index($request)
     {
-        $grades = $this->gradeRepository->paginate();
+        $grades = $this->gradeRepository->paginate($request->perPage);
         return $grades;
     }
 

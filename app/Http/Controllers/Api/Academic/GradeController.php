@@ -16,7 +16,7 @@ class GradeController extends Controller
     public function index(Request $request)
     {
         return $this->handleApi(function () use ($request) {
-            $grades = $this->gradeService->index();
+            $grades = $this->gradeService->index($request);
             return ApiResponseFactory::success()->data($grades)->statusCode(200)->toJson();
         });
     }
