@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'teacher' => [
+        'teacher_created_successfully' => 'تم إنشاء المعلم بنجاح',
+        'teacher_updated_successfully' => 'تم تحديث المعلم بنجاح',
+        'teacher_deleted_successfully' => 'تم حذف المعلم بنجاح',
+        'teacher_restored_successfully' => 'تم استرجاع المعلم بنجاح',
+        'teacher_not_found' => 'المعلم غير موجود',
+    ],
     'student' => [
         'student_created_successfully' => 'تم إنشاء الطالب بنجاح',
         'student_updated_successfully' => 'تم تحديث الطالب بنجاح',

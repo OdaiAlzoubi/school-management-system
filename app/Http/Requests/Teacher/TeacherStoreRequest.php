@@ -29,15 +29,14 @@ class TeacherStoreRequest extends FormRequest
         $rules['email'] = [];
         $rules['phone'] = [];
         if (request()->has('email'))
-            $rules['email'] = ['required', 'email', 'max:255', 'unique:users,email,'];
-        $rules['phone'] = ['required', 'string', 'max:255', 'unique:users,phone,'];
+            $rules['email'] = ['required', 'email', 'max:255', 'unique:users,email'];
+        $rules['phone'] = ['required', 'string', 'max:255', 'unique:users,phone'];
         $rules['first_name'] = ['required', 'string', 'max:30'];
         $rules['middle_name'] = ['required', 'string', 'max:30'];
         $rules['last_name'] = ['required', 'string', 'max:30'];
-        $rules['national_number'] = ['required', 'string', 'max:30', 'unique:users,national_number,'];
+        $rules['national_number'] = ['required', 'numeric', 'unique:users,national_number'];
         $rules['date_of_birth'] = ['required', 'date'];
         $rules['is_active'] = ['required', 'boolean'];
-        $rules['nationality'] = ['required', 'string', 'max:30'];
         $rules['role'] = ['required', 'in:' . RoleEnum::TEACHER->value];
         $rules['gender'] = ['required', Rule::enum(GenderEnum::class)];
         $rules['address'] = ['required', 'array'];

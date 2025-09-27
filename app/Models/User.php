@@ -73,7 +73,7 @@ class User extends Authenticatable implements LaratrustUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'address' => 'json',
-            'is_active' => 'boolean',
+            // 'is_active' => 'boolean',
             'role' => RoleEnum::class,
             'gender' => GenderEnum::class,
         ];

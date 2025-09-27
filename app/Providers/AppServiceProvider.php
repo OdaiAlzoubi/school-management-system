@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\UserRepository;
 use App\Repositories\GradeRepository;
 use App\Repositories\SectionRepository;
 use App\Repositories\StudentRepository;
@@ -10,6 +11,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Repositories\GuardianRepository;
 use App\Repositories\EnrollmentRepository;
 use App\Repositories\AcademicYearRepository;
+use App\Repositories\Interface\UserRepositoryInterface;
 use App\Repositories\Interface\GradeRepositoryInterface;
 use App\Repositories\Interface\SectionRepositoryInterface;
 use App\Repositories\Interface\StudentRepositoryInterface;
@@ -32,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SubjectRepositoryInterface::class, SubjectRepository::class);
         $this->app->bind(AcademicYearRepositoryInterface::class, AcademicYearRepository::class);
         $this->app->bind(EnrollmentRepositoryInterface::class, EnrollmentRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
 
     /**
